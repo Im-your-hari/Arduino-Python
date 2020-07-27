@@ -1,26 +1,30 @@
-#program to Control LED of Arduino from Python
-#Code by: Aswinth Raj, Dated: 8-9-2017
-#Website: www.circuitdigest.com
+q='''############################################
+     #           Arduino-Meets-Python           #
+     # Code by: Harikrishnan KB , Kerala ,India #
+     #     Think Different Make it Awesome      #
+     ############################################
+'''
 
-import serial #Serial imported for Serial communication
-import time #Required to use delay functions
+import serial
+import time 
  
-ArduinoSerial = serial.Serial('com4',9600) #Create Serial port object called arduinoSerialData
-time.sleep(2) #wait for 2 secounds for the communication to get established
+ArduinoSerial = serial.Serial('/dev/ttyUSB0',9600)
+time.sleep(2) 
 
-print(ArduinoSerial.readline()) #read the serial data and print it as line
-print("Enter 1 to turn ON LED and 0 to turn OFF LED")
+print(q)
+print(ArduinoSerial.readline())
+print("MENU ::\n1 -> TURN ON\n0 -> TURN OFF")
 
  
-while True: #Do this forever
-    var = input() #get input from user
-    print("you entered", var) #print the intput for confirmation
-    if(var == '1'): #if the value is 1
-        ArduinoSerial.write('1') #send 1
+while True: 
+    var = input("Enter 1 or 2 : ")
+    print("you entered", var)
+    if(var == '1'): 
+        ArduinoSerial.write(b'1') #send 1->b'1' used to encode the sending data
         print("LED turned ON")
         time.sleep(1)
     
-    if(var == '0'): #if the value is 0
-        ArduinoSerial.write('0') #send 0
+    if(var == '0'):
+        ArduinoSerial.write(b'0') #send 0->b'0' used to encode the sending data
         print("LED turned OFF")
         time.sleep(1)
